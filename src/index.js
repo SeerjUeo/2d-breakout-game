@@ -28,22 +28,6 @@ import {
 	drawBricks
 } from "./bricks.js";
 
-export {
-	getX,
-	setX,
-	getY,
-	setY,
-	getDx,
-	setDx,
-	getDy,
-	setDy
-}
-
-var x = getCanvas().width / 2;
-var y = getCanvas().height - 30;
-var dx = 2;
-var dy = -2;
-
 function draw() {
 	clearCanvas();
 
@@ -61,35 +45,3 @@ function draw() {
 }
 
 draw();
-
-function getX() {
-	return x;
-}
-
-function setX(number) {
-	x = number;
-}
-
-function getY() {
-	return y;
-}
-
-function setY(number) {
-	y = number;
-}
-
-function getDx() {
-	return dx;
-}
-
-function setDx(number) {
-	dx = number;
-}
-
-function getDy() {
-	return dy;
-}
-
-function setDy(number) {
-	dy = number;
-}

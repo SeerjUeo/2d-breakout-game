@@ -1,14 +1,4 @@
 import {
-    getX,
-    setX,
-    getY,
-    setY,
-    getDx,
-    setDx,
-    getDy,
-    setDy
-} from './index.js';
-import {
     getCanvas,
     getCtx
 } from './canvas.js';
@@ -25,29 +15,40 @@ import {
 
 export {
     drawBall,
-    updateBallPosition
+    updateBallPosition,
+    getX,
+    setX,
+    getY,
+    setY,
+    getDx,
+    setDx,
+    getDy,
+    setDy
 };
 
 var ballRadius = 10;
+var x = getCanvas().width / 2;
+var y = getCanvas().height - 30;
+var dx = 2;
+var dy = -2;
 
 function drawBall() {
     getCtx().beginPath();
-    getCtx().arc(getX(), getY(), ballRadius, 0, Math.PI * 2);
+    getCtx().arc(x, y, ballRadius, 0, Math.PI * 2);
     getCtx().fillStyle = "#0095DD";
     getCtx().fill();
     getCtx().closePath();
 }
 
 function updateBallPosition() {
-    if (getX() + getDx() > getCanvas().width - ballRadius || getX() + getDx() < ballRadius) {
-        setDx(getDx() * (-1));
+    if (x + dx > getCanvas().width - ballRadius || x + dx < ballRadius) {
+        dx = -dx;
     }
-    if (getY() + getDy() < ballRadius) {
-        setDy(getDy() * (-1));
-
-    } else if (getY() + getDy() > getCanvas().height - ballRadius) {
-        if (getX() > getPaddleX() && getX() < getPaddleX() + getPaddleWidth()) {
-            setDy(getDy() * (-1));
+    if (y + dy < ballRadius) {
+        dy = -dy;
+    } else if (y + dy > getCanvas().height - ballRadius) {
+        if (x > getPaddleX() && x < getPaddleX() + getPaddleWidth()) {
+            dy = -dy;
         } else {
             setLives(getLives() - 1);
             if (getLives() == 0) {
@@ -55,14 +56,46 @@ function updateBallPosition() {
                 document.location.reload();
                 return;
             } else {
-                setX(getCanvas().width / 2);
-                setY(getCanvas().height - 30);
-                setDx(3);
-                setDy(-3);
+                x = getCanvas().width / 2;
+                y = getCanvas().height - 30;
+                dx = 3;
+                dy = -3;
                 setPaddleX((getCanvas().width - getPaddleWidth()) / 2);
             }
         }
     }
-    setX(getDx() + getX());
-    setY(getDy() + getY());
+    x += dx
+    y += dy
+}
+
+function getX() {
+    return x;
+}
+
+function setX(number) {
+    x = number;
+}
+
+function getY() {
+    return y;
+}
+
+function setY(number) {
+    y = number;
+}
+
+function getDx() {
+    return dx;
+}
+
+function setDx(number) {
+    dx = number;
+}
+
+function getDy() {
+    return dy;
+}
+
+function setDy(number) {
+    dy = number;
 }

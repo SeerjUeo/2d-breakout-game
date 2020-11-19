@@ -10,7 +10,7 @@ import {
     setDx,
     getDy,
     setDy
-} from './index.js';
+} from './ball.js';
 import {
     getScore,
     setScore
